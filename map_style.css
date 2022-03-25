@@ -1,0 +1,76 @@
+html { 
+	height: 100%;
+	width: 100%;
+}
+
+body { 
+	height: 100%;
+	width: 100%;
+	background-color: #d3eaf2;
+    color: #0b2d39;
+    font-size: small;
+    font-family: Sans-serif,"Georgia", "Open Sans";
+}
+
+#table {
+
+    border:none;
+	margin: 0 auto;
+	width:1000px;
+	height:500px;
+	background-color:#f5dbbb;
+
+}
+	
+
+
+#header {
+	
+	background-color:#1979a9 ;
+	font-size: 20px;
+	color: white;
+	text-align:center;
+	
+}
+/* #header img { */
+	/* position: absolute; */
+	/* height: 64px; */
+/* } */
+
+#map_canvas {
+	width: 800px; 
+	height: 500px;
+
+}
+
+	
+#side_bar {
+	width:200px;
+	height:500px;
+	color: #4444ff; 
+	overflow:auto;
+	line-height:1.5;
+}
+	
+
+
+#info_box {
+  width: 1000px;
+  /* height: 100px; */
+  border: none;
+  margin: 0 auto;
+  text-align: left;
+  padding: 5px;
+  /* font-weight: bold; */
+  border-radius: 2px;
+}
+
+.infowindow{
+	/* box-shadow:none; */
+    color:#515151;
+    text-align: center;
+    width: 100%;
+    /* border-radius: 0; */
+    /* left: 0 !important; */
+    /* top: 20px !important; */
+}

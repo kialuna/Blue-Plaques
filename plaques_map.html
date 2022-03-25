@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<head>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBDeTOOeDBwTyniTZ22DGJBOQHJBjLUNdo"></script>
+	<script type="text/javascript" src=" markerclusterer.js"></script>
+	<script type="text/javascript" src="downloadxml.js"></script>
+	<script type="text/javascript" src="jscoord-1.1.1.js"></script>
+	<script type="text/javascript" src="BluePlaquesLocations.js"></script>
+	<script type="text/javascript" src="map_setup_plaques.js"></script>
+	<link rel="stylesheet" media="all" href="map_style.css" type="text/css">
+	<title>Blue plaques example</title>
+</head>
+
+<body onload="initialize()">
+	<div id="header">
+		<h1> Leeds Blue Plaques </h1>
+		<!-- <img src="owl.png"><img> -->
+	</div>
+	<table id="table" border="1"> 
+      <tr> 
+        <td> 
+           <div id="map_canvas"></div> 
+        </td> 
+        <td valign="top" > 
+            <div id="side_bar"></div> 
+        </td> 
+      </tr> 
+    </table> 
+	
+	
+	<!-- <div class="gmap" id="map_canvas"> </div> -->
+	<!-- <div id="side_bar" style="width:300px;height:450px; text-decoration: underline; color: #4444ff; overflow:auto;"></div> -->
+	<div id="info_box">
+		<h3><b>The Leeds Blue Plaques Scheme</b></h3>
+		<p>The Leeds Civic Trust have been installing blue plaques throughout Leeds since 1987. Their aim is to commemorate important 
+			people, events and buildings, and educate the public on the history Leeds. Blue plaques are nominated by members of the public, 
+			creating a sense of involvement and community for the residents of Leeds. More info on the scheme can be found on the 
+			<a href="https://leedscivictrust.org.uk/whatwedo/heritage/blue-plaques/">Leeds Civic Trust website.</a></p>
+			
+		<h3><b>The Data</b></h3>
+		<p>Blue Plaques data has been provided by The University of Leeds, and OSGB grid coordinates have been converted to WGS84 latitude 
+		and longitude using the <a href="http://www.jstott.me.uk/jscoord/">JScoord</a>library.</p>
+		
+		<h3><b>The Code</b></h3>
+		<p>This map uses the
+		<a href="https://developers.google.com/maps/documentation/javascript/?csw=1">Google Maps Javascript API</a>. 
+		The code is based on code provided by The University of Leeds, together with 
+		<a href="http://www.geocodezip.com/v3_MW_example_map3_clustered.html">this</a>
+		example of a clustered map with a sidebar.</p>
+		
+		
+	
+		
+		
+
+	</div>
+</body>
+
+

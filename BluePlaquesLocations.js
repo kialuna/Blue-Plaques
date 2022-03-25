@@ -1,3 +1,8 @@
+/*
+Javascript for Blue Plaques data (Task 5.3)
+Student number: 201578549
+*/
+
 var os_markers = [
   {
    'id':1,

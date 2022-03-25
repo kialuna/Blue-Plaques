@@ -1,41 +1,41 @@
-//<![CDATA[
-      // this variable will collect the html which will eventually be placed in the side_bar 
-var side_bar_html = ""; 
-var myCentreLat = 53.82028051341155;
-var myCentreLng = -1.5443547457634423;
-var initialZoom = 11;
-// arrays to hold copies of the markers and html used by the side_bar 
-// because the function closure trick doesnt work there 
-var gmarkers = []; 
+/*
+Javascript for Blue Plaques website (Task 5.3)
+Student number: 201578549
+*/
 
-// global "map" variable
-var map;
-var markerclusterer;
-var infowindow = new google.maps.InfoWindow();
+
+
+// First some global variables are defined
+
+
+var side_bar_html = "";   // Variable collects the html which will eventually be placed in the side_bar 
+var myCentreLat = 53.82028051341155;  // Lat and Long coords on which initial map view will be centered, and initial zoom level
+var myCentreLng = -1.5443547457634423;
+var initialZoom = 11; 
+var gmarkers = []; // Array to hold markers
+var map; 
+var infowindow = new google.maps.InfoWindow(); 
+
 
 // A function to create the marker and set up the event window function 
 
 
 function createMarker(myPos,myTitle,myInfo) {
+	
 	var marker = new google.maps.Marker({
 		position: myPos,
 		map: map,
 		title: myTitle,
-		icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-		//zIndex: Math.round(myPos.lat()*-100000)<<5 // No idea what this does yet
-		
-		
+		icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' // Blue drop icon		
 	});
-    // var infowindow = new google.maps.InfoWindow({content: myInfo});
-   
-    //google.maps.event.addListener(marker,'click', infoCallback(infowindow, marker));
-	google.maps.event.addListener(marker, 'click', function() {      // Event window function
+
+	google.maps.event.addListener(marker, 'click', function() {      // Event window function on click
         map.panTo(marker.getPosition());
         if (marker.getVisible() && (marker.getMap() != null)) {     // If marker is visible (not clustered) then display the info window
           infowindow.setContent(myInfo); 
           infowindow.open(map,marker);
         } 
-		else {                                                    // Otherwise 
+		else {                                                   // Else open cluster
           infowindow.setContent(myInfo);
           infowindow.setPosition(marker.getPosition());
           infowindow.open(map);
@@ -45,25 +45,28 @@ function createMarker(myPos,myTitle,myInfo) {
           });
         }
     });
-	// save the info we need to use later for the side_bar
-    gmarkers.push(marker);
-    // add a line to the side_bar html
-    side_bar_html += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + myTitle + '<\/a><br>';
+	
+    gmarkers.push(marker); // push marker to gmarkers array
+    
+    side_bar_html += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + myTitle + '<\/a><br>'; // add a line to the side_bar html
    
 }
 
 
  
 // This function picks up the click and opens the corresponding info window
+
+
 function myclick(i) {
   google.maps.event.trigger(gmarkers[i], "click");
   map.setZoom(16)
   
 }
 
+// Initialize function creates the map onload 
+
 function initialize() {
-  // create the map
-	var latlng = new google.maps.LatLng(myCentreLat,myCentreLng);
+	var latlng = new google.maps.LatLng(myCentreLat,myCentreLng); //create latlng coordinates from center coordinates previously defined
 	var myOptions = {
 		zoom: initialZoom,
 		center: latlng,
@@ -73,15 +76,17 @@ function initialize() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
   
-	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+	map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);  // Creates map with id "map_canvas" and my options
   
-	google.maps.event.addListener(map, 'click', function() {
+	google.maps.event.addListener(map, 'click', function() {     // infowindow closes when user clicks on the map
 		infowindow.close();
 	});
+	
+	// For loop goes through os_markers setting info for infowindow, converting coordinates to lat and long and creating a marker for each
   
-	for (id in os_markers) {
-		var info = "<div class=infowindow><h1>" +
-			os_markers[id].title + "</h1><h3>Erected: "+os_markers[id].date+"</h3><p>"+os_markers[id].caption + "</p></div>";
+	for (id in os_markers) {  
+		var info = "<div class=infowindow><h2>" +
+			os_markers[id].title + "</h2><p><b>Unveiled:</b> "+os_markers[id].date+"</p><p>"+os_markers[id].caption + "</p></div>";
 
 		// Convert co-ords
 		var osPt = new OSRef(
@@ -90,22 +95,15 @@ function initialize() {
 		var llPt = osPt.toLatLng(osPt);
 		llPt.OSGB36ToWGS84();
 
-		var marker= new createMarker(new google.maps.LatLng(llPt.lat,llPt.lng),os_markers[id].title,info);
+		var marker= new createMarker(new google.maps.LatLng(llPt.lat,llPt.lng),os_markers[id].title,info);  
     }
+	
+	// Creating clusters from markers using tool found at https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js
+	
     markerCluster = new MarkerClusterer(map, gmarkers, { 
 		imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' 
 	});
-	// put the assembled side_bar_html contents into the side_bar div
+	
+	// Put the assembled side_bar_html contents into the side_bar div
 	document.getElementById("side_bar").innerHTML = side_bar_html;
 }
-
-
-    
-
-    // This Javascript is based on code provided by the
-    // Community Church Javascript Team
-    // http://www.bisphamchurch.org.uk/   
-    // http://econym.org.uk/gmap/
-    // from the v2 tutorial page at:
-    // http://econym.org.uk/gmap/basic3.htm 
-//]]>

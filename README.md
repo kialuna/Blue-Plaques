@@ -9,13 +9,15 @@
 
 ## Contents: 
 
-#### plaques_map.html 
-#### BluePlaquesLocations.js
-#### map_setup_plaques.js
-#### owl.png
-#### map_style.css
-#### jscoord-1.1.1.js
-#### downloadxml.js
+[HTML](https://github.com/kialuna/Blue-Plaques/blob/main/plaques_map.html)
+
+[Javascript Map Setup](https://github.com/kialuna/Blue-Plaques/blob/main/map_setup_plaques.js)
+
+[Javascript Marker Data](https://github.com/kialuna/Blue-Plaques/blob/main/BluePlaquesLocations.js)
+
+[CSS](https://github.com/kialuna/Blue-Plaques/blob/main/map_style.css)
+
+Other code which is called upon in my website but is not my own, as well as images, are found in my repository. 
 
 
 
